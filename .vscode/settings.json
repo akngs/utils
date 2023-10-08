@@ -1,0 +1,23 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.eslint": true,
+    "addMissingImports": true
+  },
+  "deno.enable": false,
+  "eslint.validate": ["javascript", "typescript", "svelte"],
+  "eslint.options": {
+    "extensions": [".js", ".ts"]
+  },
+  "prettier.enable": true,
+  "editor.formatOnSave": true,
+  "[svelte]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

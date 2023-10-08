@@ -1,0 +1,13 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint-js:
+      root: /
+      files: git diff --name-only --staged
+      glob: '*.{ts,js,svelte}'
+      run: npm run lint
+    test:
+      root: /
+      files: git diff --name-only --staged
+      glob: '*.{ts,js,svelte}'
+      run: npm run test:ut:files -- {files}
