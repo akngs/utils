@@ -3,13 +3,13 @@ import { describe, expect, it } from 'vitest'
 import { makeReadable } from './readability'
 
 describe('readability', () => {
-  it('HTML 파싱', () => {
+  it('should parse HTML', () => {
     const raw = '<head><title>Title</title></head><body><h1>Hello</h1><p>Hello World</p></body>'
     const actual = makeReadable(raw)
     expect(actual.title).toEqual('Title')
   })
 
-  it('Purify', () => {
+  it('should sanitize HTML', () => {
     const injection = '<img src=x onerror=alert(1) >'
     const raw = `<head><title>Title</title></head><body><p>${injection} Hello World</p></body>`
     const actual = makeReadable(raw)
