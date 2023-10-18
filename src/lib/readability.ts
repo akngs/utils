@@ -1,4 +1,5 @@
 import { Readability } from '@mozilla/readability'
+import createDOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
 
 export type ReadableContent = {
@@ -9,7 +10,8 @@ export type ReadableContent = {
 }
 
 export function makeReadable(html: string): ReadableContent {
-  const doc = new JSDOM(html).window.document
+  const sanitized = createDOMPurify(new JSDOM('').window).sanitize(html, { WHOLE_DOCUMENT: true })
+  const doc = new JSDOM(sanitized).window.document
   const reader = new Readability(doc)
   const parsed = reader.parse()
 
