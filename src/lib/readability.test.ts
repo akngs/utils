@@ -4,9 +4,13 @@ import { makeReadable } from './readability'
 
 describe('readability', () => {
   it('should parse HTML', () => {
-    const raw = '<head><title>Title</title></head><body><h1>Hello</h1><p>Hello World</p></body>'
+    const raw = '<head><title>Title</title></head><body><p>Hello <b>World</b></p></body>'
     const actual = makeReadable(raw)
     expect(actual.title).toEqual('Title')
+    expect(actual.excerpt).toEqual('Hello World')
+    expect(actual.htmlContent).toMatch('<p>Hello <b>World</b></p>')
+    expect(actual.textContent).toMatch('Hello World')
+    expect(actual.mdContent).toEqual('Hello **World**')
   })
 
   it('should sanitize HTML', () => {
