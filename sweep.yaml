@@ -1,14 +1,12 @@
-# Sweep AI turns bugs & feature requests into code changes (https://sweep.dev)
-# For details on our config file, check out our docs at https://docs.sweep.dev/usage/config
+# https://docs.sweep.dev/usage/config
 
 # This setting contains a list of rules that Sweep will check for. If any of these rules are broken in a new commit, Sweep will create an pull request to fix the broken rule.
 rules:
-- "All docstrings and comments should be up to date."
-- "HTML code should be properly sanitized before processing."
-- "Code should be properly formatted and indented."
-- "Variable and function names should be descriptive and follow a consistent naming convention."
-- "Comments should be used to explain complex code or provide additional context."
-- "Code should be organized into logical modules and files."
+  - 'All JSDocs and comments should be up to date.'
+  - 'Every exported function should have a JSDoc.'
+  - 'README.md should describe all API endpoints.'
+  - 'Comments should be used to explain complex code or provide additional context.'
+  - 'Code should be organized into logical modules and files.'
 
 # This is the branch that Sweep will develop from and make pull requests to. Most people use 'main' or 'master' but some users also use 'dev' or 'staging'.
 branch: 'main'
@@ -21,7 +19,7 @@ gha_enabled: True
 # Example:
 #
 # description: sweepai/sweep is a python project. The main api endpoints are in sweepai/api.py. Write code that adheres to PEP8.
-description: ''
+description: 'akngs/utils is a SvelteKit project.'
 
 # This sets whether to create pull requests as drafts. If this is set to True, then all pull requests will be created as drafts and GitHub Actions will not be triggered.
 draft: False
