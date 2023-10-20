@@ -27,7 +27,7 @@ This endpoint receives a JSON payload containing the title and body of an articl
 
 #### Example
 
-##### Request
+##### Example Request
 
 ```json
 {
@@ -36,7 +36,7 @@ This endpoint receives a JSON payload containing the title and body of an articl
 }
 ```
 
-##### Response
+##### Example Response
 
 ```json
 {
