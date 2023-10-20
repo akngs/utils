@@ -8,7 +8,7 @@ A suite of HTTP API utilities.
 
 Returns the readability enhanced version of the given URL.
 
-`GET /readability/{url}`
+`GET /readable?u={url}`
 
 Request:
 
