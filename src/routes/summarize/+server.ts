@@ -1,18 +1,15 @@
-import { json } from '@sveltejs/kit'
-import axios from 'axios'
+import { error, json } from '@sveltejs/kit'
 
-export async function post(request) {
-  const { title, body } = request.body
-
-  if (typeof title !== 'string' || typeof body !== 'string') {
-    return json({ error: 'Invalid request payload. Title and body must be strings.' }, { status: 400 })
-  }
+export const POST = async ({ request, fetch }) => {
+  const data = await request.json()
+  if (!isValid(data)) throw error(400)
 
   try {
+    // TODO: use sveltekit's fetch instead of axios
     const response = await axios.post(
       'https://api.openai.com/v1/engines/davinci-codex/completions',
       {
-        prompt: `${title}\n\n${body}`,
+        prompt: `${data.title}\n\n${data.body}`,
         max_tokens: 60,
       },
       {
@@ -27,4 +24,8 @@ export async function post(request) {
   } catch (error) {
     return json({ error: 'Failed to generate summary. Please try again later.' }, { status: 500 })
   }
+}
+
+function isValid(d: Record<string, unknown>): d is { title: string; body: string } {
+  return typeof d.title === 'string' && typeof d.body === 'string'
 }
