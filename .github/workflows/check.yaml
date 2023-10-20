@@ -1,0 +1,21 @@
+name: Run ATs
+
+on:
+  deployment_status:
+
+jobs:
+  run-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install Dependencies
+        run: npm ci
+      - name: check
+        run: npm run check
+      - name: lint
+        run: npm run lint
+      - name: test
+        run: npm run test
