@@ -8,13 +8,13 @@ A suite of HTTP API utilities.
 
 Returns the readability enhanced version of the given URL.
 
-`GET /readable?u={url}`
+`GET /readable?url={url}`
 
 Request:
 
 ```bash
 curl -X GET \
-  http://HOST/readable?u=https://google.com \
+  http://HOST/readable?url=https://google.com \
   -H 'Accept: application/json'
 ```
 
