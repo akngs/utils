@@ -1,4 +1,4 @@
-import { error } from '@sveltejs/kit'
+import { error, json } from '@sveltejs/kit'
 
 import { makeReadable } from '$lib/readability.js'
 
@@ -14,5 +14,5 @@ export const GET = async ({ url, fetch }) => {
 
   const html = await res.text()
   const parsed = makeReadable(html)
-  return new Response(JSON.stringify(parsed), { headers: { 'content-type': 'application/json' } })
+  return json(parsed)
 }
