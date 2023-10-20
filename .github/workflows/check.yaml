@@ -1,4 +1,4 @@
-name: Run ATs
+name: Run checks
 
 on:
   deployment_status:
