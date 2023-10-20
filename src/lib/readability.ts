@@ -11,6 +11,12 @@ export type ReadableContent = {
   excerpt: string
 }
 
+/**
+ * Sanitizes and parses the input HTML string, and returns a `ReadableContent` object containing the title, HTML
+ * content, text content, markdown content, and excerpt of the parsed document.
+ *
+ * @param {string} html - The HTML string to be parsed.
+ */
 export function makeReadable(html: string): ReadableContent {
   const sanitized = createDOMPurify(new JSDOM('').window).sanitize(html, { WHOLE_DOCUMENT: true })
   const doc = new JSDOM(sanitized).window.document
