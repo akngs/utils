@@ -3,7 +3,7 @@
 # This setting contains a list of rules that Sweep will check for. If any of these rules are broken in a new commit, Sweep will create an pull request to fix the broken rule.
 rules:
   - 'All JSDocs and comments should be up to date.'
-  - 'Every exported functions, classes, variables, and types should have a JSDoc.'
+  - 'Every exported functions, classes, variables, and types should have a comment describing what it is/does.'
   - 'README.md should describe all API endpoints.'
   - 'Comments should be used to explain complex code or provide additional context.'
   - 'Code should be organized into logical modules and files.'
