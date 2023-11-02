@@ -1,9 +1,14 @@
+import type { Config } from '@sveltejs/adapter-vercel'
 import { error } from '@sveltejs/kit'
 import { OpenAIStream, StreamingTextResponse } from 'ai'
 import OpenAI from 'openai'
 
 import { OPENAI_API_KEY, SECRET } from '$env/static/private'
 import { makeReadable } from '$lib/readability'
+
+export const config: Config = {
+  runtime: 'edge',
+}
 
 const openai = new OpenAI({ apiKey: OPENAI_API_KEY })
 
