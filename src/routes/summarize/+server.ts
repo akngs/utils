@@ -11,7 +11,7 @@ const openai = new OpenAI({ apiKey: OPENAI_API_KEY })
  * Summarizes the given URL.
  */
 export const GET = async ({ url, request }) => {
-  const authr = request.headers.get('authorization')
+  const authr = request.headers.get('authorization') ?? url.searchParams.get('secret')
   if (authr !== SECRET) throw error(401, 'Unauthorized')
 
   const urlParam = url.searchParams.get('url')
