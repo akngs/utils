@@ -4,7 +4,6 @@ import { OpenAIStream, StreamingTextResponse } from 'ai'
 import OpenAI from 'openai'
 
 import { OPENAI_API_KEY, SECRET } from '$env/static/private'
-import { makeReadable } from '$lib/readability'
 
 export const config: Config = {
   runtime: 'edge',
@@ -15,32 +14,18 @@ const openai = new OpenAI({ apiKey: OPENAI_API_KEY })
 /**
  * Summarizes the given URL.
  */
-export const GET = async ({ url, request }) => {
+export const GET = async ({ url, request, fetch }) => {
   const authr = request.headers.get('authorization') ?? url.searchParams.get('secret')
   if (authr !== SECRET) throw error(401, 'Unauthorized')
 
   const urlParam = url.searchParams.get('url')
   if (!urlParam) throw error(400, 'url parameter is missing')
 
-  const res = await fetch(urlParam)
-  if (!res.ok) throw error(502, `Failed to fetch url. Status code: ${res.status}`)
-
-  const html = await res.text()
-  const parsed = makeReadable(html)
-  return summarize(`${parsed.title}\n\n${parsed.mdContent}`)
-}
-
-/**
- * Summarizes the given text.
- */
-export const POST = async ({ request }) => {
-  const reqData = await request.json()
-  if (!validateReqData(reqData)) throw error(400, 'Invalid request data')
-  return summarize(reqData.content)
-}
-
-function validateReqData(reqData: Record<string, unknown>): reqData is { content: string } {
-  return typeof reqData.content === 'string'
+  const res0 = await fetch(`https://akngs-utils.vercel.app/readable?url=${encodeURIComponent(urlParam)}`, {
+    headers: { authorization: SECRET },
+  })
+  const { title, mdContent } = (await res0.json()) as { title: string; mdContent: string }
+  return summarize(`${title}\n\n${mdContent}`)
 }
 
 async function summarize(content: string) {
